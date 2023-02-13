@@ -1,11 +1,12 @@
 import React from 'react';
 import {Text, SafeAreaView} from 'react-native';
-import {t} from 'i18next';
+import {t} from '../../utils/translations';
+import messages from './messages';
 
 const Home = (): JSX.Element => {
   return (
     <SafeAreaView>
-      <Text>{t('helloWorld')}</Text>
+      <Text>{t(messages.helloWorld)}</Text>
     </SafeAreaView>
   );
 };
