@@ -11,4 +11,11 @@ export default namespacedMessages('Home')({
     message: 'Delete all',
     description: 'Button to remove all to-dos',
   },
+  pendingTasks: {
+    id: 'pendingTasks',
+    message: {
+      one: 'You have {{count}} pending task',
+      other: 'You have {{count}} pending tasks',
+    },
+  },
 });

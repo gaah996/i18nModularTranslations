@@ -24,6 +24,9 @@ const Home = (): JSX.Element => {
           <Text style={styles.actionText}>{t(messages.removeAll)}</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.infoContainer}>
+        <Text>{t(messages.pendingTasks, {count: 1})}</Text>
+      </View>
       <ScrollView style={styles.tasksContainer}>
         <Task text={'Go to the supermarket'} createdAt={new Date()} />
         <Task

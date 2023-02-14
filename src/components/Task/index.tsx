@@ -23,17 +23,11 @@ const Task = ({text, createdAt, completedAt}: TaskProps): JSX.Element => {
         </Text>
       </View>
       <Text style={styles.taskDate}>
-        {t(messages.createdAt, {
-          date: createdAt.toLocaleString(),
-          interpolation: {escapeValue: false},
-        })}
+        {t(messages.createdAt, {date: createdAt.toLocaleString()})}
       </Text>
       {!!completedAt && (
         <Text style={styles.taskDate}>
-          {t(messages.completedAt, {
-            date: completedAt.toLocaleString(),
-            interpolation: {escapeValue: false},
-          })}
+          {t(messages.completedAt, {date: completedAt.toLocaleString()})}
         </Text>
       )}
       <View style={styles.actionsContainer}>

@@ -8,7 +8,6 @@ export default StyleSheet.create({
   actionsContainer: {
     flexDirection: 'row',
     paddingHorizontal: 10,
-    paddingBottom: 20,
   },
   actionWrapper: {
     marginHorizontal: 10,
@@ -19,7 +18,12 @@ export default StyleSheet.create({
   actionText: {
     color: 'white',
   },
+  infoContainer: {
+    padding: 20,
+    paddingBottom: 10,
+  },
   tasksContainer: {
     padding: 20,
+    paddingTop: 10,
   },
 });

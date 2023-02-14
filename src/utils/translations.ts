@@ -1,8 +1,10 @@
-import {StringMap, t as i18t, TOptionsBase} from 'i18next';
+import i18next, {StringMap, t as i18t, TOptionsBase} from 'i18next';
+
+type TraslationQuantifier = 'zero' | 'one' | 'two' | 'few' | 'many' | 'other';
 
 interface TranslationMessage {
   id: string;
-  message: string;
+  message: string | Partial<Record<TraslationQuantifier, string>>;
   description?: string;
 }
 
@@ -15,13 +17,25 @@ interface TranslationMessage {
  * @returns         A translated message string
  */
 export function t(
-  message: TranslationMessage,
+  messageObj: TranslationMessage,
   options?: TOptionsBase & StringMap,
 ): string {
-  return i18t(message.id, {
-    defaultValue: message.message,
-    ...options,
-  });
+  const {id, message} = messageObj;
+
+  if (typeof message === 'object') {
+    Object.keys(message).forEach((key: string) => {
+      i18next.addResource(
+        'en',
+        'translation',
+        `${id}_${key}`,
+        message[key as TraslationQuantifier] as string,
+      );
+    });
+  } else {
+    i18next.addResource('en', 'translation', id, message);
+  }
+
+  return i18t(id, {...options});
 }
 
 /**
