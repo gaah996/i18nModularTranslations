@@ -1,0 +1,12 @@
+{
+  "Header.helloWorld": "Hello World [App name]",
+  "Header.welcome": "Welcome",
+  "Task.createdAt": "Created on {{date}} [Date when task was created]",
+  "Task.completedAt": "Finished on {{date}} [Date when task was finished]",
+  "Task.actions.done": "Mark as done",
+  "Task.actions.remove": "Delete",
+  "Home.add": "Add new [Button to add new to-do]",
+  "Home.removeAll": "Delete all [Button to remove all to-dos]",
+  "Home.pendingTasks_one": "You have {{count}} pending task",
+  "Home.pendingTasks_other": "You have {{count}} pending tasks"
+}
