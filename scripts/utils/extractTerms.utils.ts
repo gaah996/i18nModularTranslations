@@ -137,6 +137,27 @@ function createTermsFromMessages(
 }
 
 /**
+ * Counts how many terms have the provided status
+ *
+ * @param terms   Terms map
+ * @param status  Status to count
+ * @returns       Number of terms with provided status
+ */
+function countTermsWithStatus(
+  terms: TermsJson,
+  status: Term['status'],
+): number {
+  let count: number = 0;
+  Object.values(terms).forEach(term => {
+    if (term.status === status) {
+      count++;
+    }
+  });
+
+  return count;
+}
+
+/**
  * Friendly console log with script results
  *
  * @param extractedMessages   Extract messages from the app
@@ -146,20 +167,6 @@ function logTermsStats(
   extractedMessages: ExtractedMessages,
   generatedTerms: TermsJson,
 ): void {
-  function countTermsWithStatus(
-    terms: TermsJson,
-    status: Term['status'],
-  ): number {
-    let count: number = 0;
-    Object.values(terms).forEach(term => {
-      if (term.status === status) {
-        count++;
-      }
-    });
-
-    return count;
-  }
-
   const extractedMessagesCount: number = Object.keys(extractedMessages).length;
   const addedTermsCount: number = countTermsWithStatus(generatedTerms, 'added');
   const changedTermsCount: number = countTermsWithStatus(

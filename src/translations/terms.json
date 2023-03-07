@@ -1,47 +1,47 @@
 {
   "Header.helloWorld": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Hello World",
     "description": "App name"
   },
   "Header.welcome": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Welcome"
   },
   "Task.createdAt": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Created on {{date}}",
     "description": "Date when task was created"
   },
   "Task.completedAt": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Finished on {{date}}",
     "description": "Date when task was finished"
   },
   "Task.actions.done": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Mark as done"
   },
   "Task.actions.remove": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Delete"
   },
   "Home.add": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Add new",
     "description": "Button to add new to-do"
   },
   "Home.removeAll": {
-    "status": "unchanged",
+    "status": "added",
     "message": "Delete all",
     "description": "Button to remove all to-dos"
   },
   "Home.pendingTasks_one": {
-    "status": "unchanged",
+    "status": "added",
     "message": "You have {{count}} pending task"
   },
   "Home.pendingTasks_other": {
-    "status": "unchanged",
+    "status": "added",
     "message": "You have {{count}} pending tasks"
   }
 }

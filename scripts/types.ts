@@ -31,3 +31,10 @@ export interface Term {
 export type TermsJson = {
   [id: string]: Term;
 };
+
+export interface SortedTranslations {
+  addedTranslations: Record<string, string>;
+  updatedTranslations: Record<string, string>;
+  unchangedTranslations: Record<string, string>;
+  removedTranslations: Record<string, string>;
+}

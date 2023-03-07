@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "extract-terms": "ts-node ./scripts/extractTerms"
+    "extract-terms": "ts-node ./scripts/extractTerms",
+    "update-translations": "ts-node ./scripts/updateTranslations"
   },
   "dependencies": {
     "i18next": "^22.4.9",
