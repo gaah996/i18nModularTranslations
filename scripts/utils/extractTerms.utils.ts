@@ -186,8 +186,8 @@ function logTermsStats(
   console.log(`${chalk.bold(extractedMessagesCount)} terms extracted\n`);
 
   console.log(chalk.green(`${chalk.bold(addedTermsCount)} terms added`));
-  console.log(chalk.red(`${chalk.bold(changedTermsCount)} terms removed`));
-  console.log(chalk.yellow(`${chalk.bold(removedTermsCount)} terms changed`));
+  console.log(chalk.red(`${chalk.bold(removedTermsCount)} terms removed`));
+  console.log(chalk.yellow(`${chalk.bold(changedTermsCount)} terms changed`));
   console.log(
     chalk.white(`${chalk.bold(unchangedTermsCount)} terms unchanged`),
   );

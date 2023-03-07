@@ -1,50 +1,72 @@
 {
-  "version": "1",
+  "version": "2",
   "terms": {
     "Header.helloWorld": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Hello World",
       "description": "App name"
     },
     "Header.welcome": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Welcome"
     },
     "Task.createdAt": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Created on {{date}}",
       "description": "Date when task was created"
     },
     "Task.completedAt": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Finished on {{date}}",
       "description": "Date when task was finished"
     },
     "Task.actions.done": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Mark as done"
     },
     "Task.actions.remove": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Delete"
     },
     "Home.add": {
-      "status": "added",
-      "message": "Add new",
+      "status": "updated",
+      "message": "Add task",
+      "previousMessage": "Add new",
       "description": "Button to add new to-do"
     },
     "Home.removeAll": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Delete all",
       "description": "Button to remove all to-dos"
     },
     "Home.pendingTasks_one": {
-      "status": "added",
+      "status": "unchanged",
       "message": "You have {{count}} pending task"
     },
     "Home.pendingTasks_other": {
-      "status": "added",
+      "status": "unchanged",
       "message": "You have {{count}} pending tasks"
+    },
+    "Common.cancel": {
+      "status": "added",
+      "message": "Cancel"
+    },
+    "Common.ok": {
+      "status": "added",
+      "message": "OK"
+    },
+    "Header.name": {
+      "status": "added",
+      "message": "Name",
+      "description": "Title of the name input alert"
+    },
+    "LanguageSelector.modalTitle": {
+      "status": "added",
+      "message": "Choose the new language:"
+    },
+    "Home.removeAllAlert": {
+      "status": "added",
+      "message": "Are you sure you want to remove all tasks?"
     }
   }
 }

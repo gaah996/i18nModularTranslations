@@ -1,0 +1,18 @@
+{
+  "[VERSION]": "2",
+  "Header.helloWorld": "Hallo Welt",
+  "Header.welcome": "Willkommen",
+  "Task.createdAt": "Erstellt am {{date}}",
+  "Task.completedAt": "Beendet am {{date}}",
+  "Task.actions.done": "Als erledigt markieren",
+  "Task.actions.remove": "Löschen",
+  "Home.add": "Aufgabe hinzufügen",
+  "Home.removeAll": "Alle löschen",
+  "Home.pendingTasks_one": "Du hast {{count}} ausstehende Aufgabe",
+  "Home.pendingTasks_other": "Du hast {{count}} ausstehende Aufgaben",
+  "Common.cancel": "Abbrechen",
+  "Common.ok": "OK",
+  "Header.name": "Name",
+  "LanguageSelector.modalTitle": "Wähltest du die neue Sprache:",
+  "Home.removeAllAlert": "Bist du sicher, dass du alle Aufgaben entfernen möchtest?"
+}

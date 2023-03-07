@@ -3,7 +3,7 @@ import {namespacedMessages} from '../../utils/translations';
 export default namespacedMessages('Home')({
   add: {
     id: 'add',
-    message: 'Add new',
+    message: 'Add task',
     description: 'Button to add new to-do',
   },
   removeAll: {

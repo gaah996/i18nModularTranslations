@@ -4,6 +4,7 @@ import i18next from 'i18next';
 import React, {FC, useEffect, useState} from 'react';
 
 import en from './translations/en.json';
+import de from './translations/de.json';
 import pt from './translations/pt.json';
 
 import Home from './containers/Home';
@@ -15,6 +16,7 @@ i18next.init({
   keySeparator: false,
   resources: {
     en: {translation: en},
+    de: {translation: de},
     pt: {translation: pt},
   },
   interpolation: {
