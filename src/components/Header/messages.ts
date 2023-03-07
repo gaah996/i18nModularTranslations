@@ -10,4 +10,9 @@ export default namespacedMessages('Header')({
     id: 'welcome',
     message: 'Welcome',
   },
+  name: {
+    id: 'name',
+    message: 'Name',
+    description: 'Title of the name input alert',
+  },
 });

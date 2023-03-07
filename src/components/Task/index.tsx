@@ -8,9 +8,17 @@ interface TaskProps {
   text: string;
   createdAt: Date;
   completedAt?: Date;
+  onComplete: () => void;
+  onRemove: () => void;
 }
 
-const Task = ({text, createdAt, completedAt}: TaskProps): JSX.Element => {
+const Task = ({
+  text,
+  createdAt,
+  completedAt,
+  onComplete,
+  onRemove,
+}: TaskProps): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.taskTextContainer}>
@@ -32,11 +40,11 @@ const Task = ({text, createdAt, completedAt}: TaskProps): JSX.Element => {
       )}
       <View style={styles.actionsContainer}>
         {!completedAt && (
-          <TouchableOpacity style={styles.actionWrapper}>
+          <TouchableOpacity style={styles.actionWrapper} onPress={onComplete}>
             <Text style={styles.actionText}>{t(messages.doneAction)}</Text>
           </TouchableOpacity>
         )}
-        <TouchableOpacity style={styles.actionWrapper}>
+        <TouchableOpacity style={styles.actionWrapper} onPress={onRemove}>
           <Text style={styles.actionText}>{t(messages.removeAction)}</Text>
         </TouchableOpacity>
       </View>

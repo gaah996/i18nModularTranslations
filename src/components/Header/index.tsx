@@ -1,15 +1,19 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, Alert} from 'react-native';
 
 import {t} from '../../utils/translations';
 import messages from './messages';
 import styles from './styles';
 
-interface HeaderProps {
-  name?: string;
-}
+const Header = (): JSX.Element => {
+  const [name, setName] = useState<string | undefined>();
 
-const Header = ({name}: HeaderProps): JSX.Element => {
+  const handleSetName = () => {
+    Alert.prompt(t(messages.name), undefined, (text: string) => {
+      setName(text);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -18,7 +22,7 @@ const Header = ({name}: HeaderProps): JSX.Element => {
             {t(messages.welcome)} <Text style={styles.boldTitle}>{name}</Text>
           </>
         ) : (
-          t(messages.helloWorld)
+          <Text onPress={handleSetName}>{t(messages.helloWorld)}</Text>
         )}
       </Text>
     </View>
