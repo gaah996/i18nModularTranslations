@@ -1,12 +1,47 @@
 {
-  "Header.helloWorld": "Hello World [App name]",
-  "Header.welcome": "Welcome",
-  "Task.createdAt": "Created on {{date}} [Date when task was created]",
-  "Task.completedAt": "Finished on {{date}} [Date when task was finished]",
-  "Task.actions.done": "Mark as done",
-  "Task.actions.remove": "Delete",
-  "Home.add": "Add new [Button to add new to-do]",
-  "Home.removeAll": "Delete all [Button to remove all to-dos]",
-  "Home.pendingTasks_one": "You have {{count}} pending task",
-  "Home.pendingTasks_other": "You have {{count}} pending tasks"
+  "Header.helloWorld": {
+    "status": "unchanged",
+    "message": "Hello World",
+    "description": "App name"
+  },
+  "Header.welcome": {
+    "status": "unchanged",
+    "message": "Welcome"
+  },
+  "Task.createdAt": {
+    "status": "unchanged",
+    "message": "Created on {{date}}",
+    "description": "Date when task was created"
+  },
+  "Task.completedAt": {
+    "status": "unchanged",
+    "message": "Finished on {{date}}",
+    "description": "Date when task was finished"
+  },
+  "Task.actions.done": {
+    "status": "unchanged",
+    "message": "Mark as done"
+  },
+  "Task.actions.remove": {
+    "status": "unchanged",
+    "message": "Delete"
+  },
+  "Home.add": {
+    "status": "unchanged",
+    "message": "Add new",
+    "description": "Button to add new to-do"
+  },
+  "Home.removeAll": {
+    "status": "unchanged",
+    "message": "Delete all",
+    "description": "Button to remove all to-dos"
+  },
+  "Home.pendingTasks_one": {
+    "status": "unchanged",
+    "message": "You have {{count}} pending task"
+  },
+  "Home.pendingTasks_other": {
+    "status": "unchanged",
+    "message": "You have {{count}} pending tasks"
+  }
 }

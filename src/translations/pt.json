@@ -1,0 +1,12 @@
+{
+    "Header.helloWorld": "Oi mundo",
+    "Header.welcome": "Bem-vindo",
+    "Task.createdAt": "Creado em {{date}}",
+    "Task.completedAt": "Concluído em {{date}}",
+    "Task.actions.done": "Marcar como concluído",
+    "Task.actions.remove": "Remover",
+    "Home.add": "Adicionar novo",
+    "Home.removeAll": "Remover todos",
+    "Home.pendingTasks_one": "Você tem {{count}} tarefa pendente",
+    "Home.pendingTasks_other": "Você tem {{count}} tarefas pendentes"
+}

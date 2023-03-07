@@ -1,3 +1,12 @@
 {
-    "helloWorld": "Hello World"
+  "Header.helloWorld": "Hello World",
+  "Header.welcome": "Welcome",
+  "Task.createdAt": "Created on {{date}}",
+  "Task.completedAt": "Finished on {{date}}",
+  "Task.actions.done": "Mark as done",
+  "Task.actions.remove": "Delete",
+  "Home.add": "Add new",
+  "Home.removeAll": "Delete all",
+  "Home.pendingTasks_one": "You have {{count}} pending task",
+  "Home.pendingTasks_other": "You have {{count}} pending tasks"
 }
