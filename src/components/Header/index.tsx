@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import {View, Text, Alert} from 'react-native';
 
 import {t} from '../../utils/translations';
+import LanguageSelector, {LanguageSelectorProps} from '../LanguageSelector';
 import messages from './messages';
 import styles from './styles';
 
-const Header = (): JSX.Element => {
+const Header = (languageProps: LanguageSelectorProps): JSX.Element => {
   const [name, setName] = useState<string | undefined>();
 
   const handleSetName = () => {
@@ -25,6 +26,7 @@ const Header = (): JSX.Element => {
           <Text onPress={handleSetName}>{t(messages.helloWorld)}</Text>
         )}
       </Text>
+      <LanguageSelector {...languageProps} />
     </View>
   );
 };

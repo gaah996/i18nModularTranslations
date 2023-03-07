@@ -13,6 +13,7 @@ import {t} from '../../utils/translations';
 import messages from './messages';
 import commonMessages from '../../common/messages';
 import styles from './styles';
+import {LanguageSelectorProps} from '../../components/LanguageSelector';
 
 interface Task {
   text: string;
@@ -20,7 +21,7 @@ interface Task {
   completedAt: Date | undefined;
 }
 
-const Home = (): JSX.Element => {
+const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
   const [tasks, setTasks] = useState<Task[]>([
     {
       text: 'Go to the supermarket',
@@ -74,7 +75,7 @@ const Home = (): JSX.Element => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Header {...languageProps} />
       <View style={styles.actionsContainer}>
         <TouchableOpacity style={styles.actionWrapper} onPress={handleAddTask}>
           <Text style={styles.actionText}>{t(messages.add)}</Text>
