@@ -12,6 +12,6 @@ export default {
 
   messagesFilesRegex: /(messages.[tj]sx?)$/,
 
-  availableLanguages: ['en', 'pt'],
+  availableLanguages: ['en', 'pt', 'de'],
   defaultLanguage: 'en',
 };

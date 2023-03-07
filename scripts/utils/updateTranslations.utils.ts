@@ -42,31 +42,48 @@ function getTranslationsByTermStatus(
     const term: Term = currentTerms[key];
     const translation: string | undefined = currentTranslations[key];
 
-    switch (term.status) {
-      case 'added':
-        if (autoUpdateTranslations) {
-          addedTranslations[key] = term.message;
-        } else {
-          addedTranslations[`[NEW]${key}`] = `[${term.message}]`;
-        }
-        break;
-      case 'updated':
-        if (autoUpdateTranslations) {
-          updatedTranslations[key] = term.message;
-        } else {
-          updatedTranslations[
-            `[UPDATED]${key}`
-          ] = `${translation} [${term.message}]`;
-        }
-        break;
-      case 'unchanged':
-        unchangedTranslations[key] = translation;
-        break;
-      case 'removed':
-        removedTranslations[`[REMOVED]${key}`] = `[${translation}]`;
-        break;
-      default:
-        break;
+    /**
+     * NEW modifier:
+     * - term was added
+     * - term was updated or unchanged but translation doesn't exist
+     * UPDATED modifier:
+     * - term was updated
+     * REMOVED modifier:
+     * - term was removed
+     * No modifier:
+     * - term is unchanged and translation exists
+     */
+
+    if (
+      term.status === 'added' ||
+      (term.status !== 'removed' && !translation)
+    ) {
+      if (autoUpdateTranslations) {
+        addedTranslations[key] = term.message;
+      } else {
+        addedTranslations[`[NEW]${key}`] = `[${term.message}]`;
+      }
+      return;
+    }
+
+    if (term.status === 'updated') {
+      if (autoUpdateTranslations) {
+        updatedTranslations[key] = term.message;
+      } else {
+        updatedTranslations[
+          `[UPDATED]${key}`
+        ] = `${translation} [${term.message}]`;
+      }
+      return;
+    }
+
+    if (term.status === 'removed') {
+      removedTranslations[`[REMOVED]${key}`] = `[${translation}]`;
+    }
+
+    if (term.status === 'unchanged') {
+      unchangedTranslations[key] = translation;
+      return;
     }
   });
 
@@ -228,11 +245,11 @@ export function logTranslationsStats(
   );
   console.log(
     chalk.red(
-      `${chalk.bold(unchangedTranslationsCount)} translations were removed`,
+      `${chalk.bold(removedTranslationsCount)} translations were removed`,
     ),
   );
   console.log(
-    `${chalk.bold(removedTranslationsCount)} translations were not changed`,
+    `${chalk.bold(unchangedTranslationsCount)} translations were not changed`,
   );
 
   if (
