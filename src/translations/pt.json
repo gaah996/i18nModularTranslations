@@ -1,13 +1,13 @@
 {
   "[VERSION]": "1",
-  "[NEW]Header.helloWorld": "[Hello World]",
-  "[NEW]Header.welcome": "[Welcome]",
-  "[NEW]Task.createdAt": "[Created on {{date}}]",
-  "[NEW]Task.completedAt": "[Finished on {{date}}]",
-  "[NEW]Task.actions.done": "[Mark as done]",
-  "[NEW]Task.actions.remove": "[Delete]",
-  "[NEW]Home.add": "[Add new]",
-  "[NEW]Home.removeAll": "[Delete all]",
-  "[NEW]Home.pendingTasks_one": "[You have {{count}} pending task]",
-  "[NEW]Home.pendingTasks_other": "[You have {{count}} pending tasks]"
+  "Header.helloWorld": "Olá mundo",
+  "Header.welcome": "Bem-vindo",
+  "Task.createdAt": "Criado em {{date}}",
+  "Task.completedAt": "Concluído em {{date}}",
+  "Task.actions.done": "Marcar como concluído",
+  "Task.actions.remove": "Remover",
+  "Home.add": "Adicionar novo",
+  "Home.removeAll": "Remover todos",
+  "Home.pendingTasks_one": "Você tem {{count}} tarefa pendente",
+  "Home.pendingTasks_other": "Você tem {{count}} tarefas pendentes"
 }
