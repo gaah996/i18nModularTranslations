@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import {SortedTranslations, TermsJson} from './types';
 import {
   loadJsonFile,
@@ -20,19 +21,23 @@ function run() {
   const currentTerms: TermsJson = loadJsonFile(variables.termsFilePath);
 
   variables.availableLanguages.forEach(lang => {
-    const translations: SortedTranslations = updateTranslationsForLanguage(
-      currentTerms,
-      lang,
-      lang === variables.defaultLanguage,
-    );
+    try {
+      const translations: SortedTranslations = updateTranslationsForLanguage(
+        currentTerms,
+        lang,
+        lang === variables.defaultLanguage,
+      );
 
-    logTranslationsStats(
-      translations,
-      lang,
-      lang === variables.defaultLanguage,
-    );
+      logTranslationsStats(
+        translations,
+        lang,
+        lang === variables.defaultLanguage,
+      );
 
-    saveTranslationsFile(translations, lang);
+      saveTranslationsFile(translations, currentTerms.version, lang);
+    } catch (e) {
+      console.log(chalk.yellow(`>> Update cancelled for ${chalk.bold(lang)}.`));
+    }
   });
 }
 

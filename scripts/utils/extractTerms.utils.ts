@@ -8,6 +8,7 @@ import {
   ExtractedMessages,
   Term,
   TermsJson,
+  TermsMap,
   TranslationMessage,
   TraslationQuantifier,
 } from '../types';
@@ -93,11 +94,11 @@ export async function loadMessagesFromFile(
 function createTermsFromMessages(
   currentTerms: TermsJson,
   extractedMessages: ExtractedMessages,
-): TermsJson {
-  const updatedTerms: TermsJson = {};
+): TermsMap {
+  const updatedTerms: TermsMap = {};
 
-  Object.keys({...currentTerms, ...extractedMessages}).forEach(key => {
-    const currentTerm: Term | undefined = currentTerms[key];
+  Object.keys({...currentTerms.terms, ...extractedMessages}).forEach(key => {
+    const currentTerm: Term | undefined = currentTerms.terms[key];
     const newMessage: ExtractedMessage | undefined = extractedMessages[key];
 
     if (!currentTerm && !!newMessage) {
@@ -116,11 +117,11 @@ function createTermsFromMessages(
       };
       return;
     }
-    if (currentTerm.message !== newMessage.message) {
+    if (currentTerm?.message !== newMessage.message) {
       updatedTerms[key] = {
         status: 'updated',
         message: newMessage.message,
-        previousMessage: currentTerm.message,
+        previousMessage: currentTerm?.message,
         description: newMessage.description,
       };
       return;
@@ -143,10 +144,7 @@ function createTermsFromMessages(
  * @param status  Status to count
  * @returns       Number of terms with provided status
  */
-function countTermsWithStatus(
-  terms: TermsJson,
-  status: Term['status'],
-): number {
+function countTermsWithStatus(terms: TermsMap, status: Term['status']): number {
   let count: number = 0;
   Object.values(terms).forEach(term => {
     if (term.status === status) {
@@ -165,7 +163,8 @@ function countTermsWithStatus(
  */
 function logTermsStats(
   extractedMessages: ExtractedMessages,
-  generatedTerms: TermsJson,
+  generatedTerms: TermsMap,
+  fileVersion: string,
 ): void {
   const extractedMessagesCount: number = Object.keys(extractedMessages).length;
   const addedTermsCount: number = countTermsWithStatus(generatedTerms, 'added');
@@ -193,7 +192,21 @@ function logTermsStats(
     chalk.white(`${chalk.bold(unchangedTermsCount)} terms unchanged`),
   );
 
+  console.log(
+    chalk.white(
+      chalk.bold(`\n>> Generated file version ${chalk.underline(fileVersion)}`),
+    ),
+  );
+
   console.log('\n--------------------\n');
+}
+
+function getTermsFileVersion(lastVersion: string | undefined): string {
+  if (typeof lastVersion === 'string') {
+    return `${parseInt(lastVersion, 10) + 1}`;
+  }
+
+  return '1';
 }
 
 /**
@@ -202,7 +215,10 @@ function logTermsStats(
  * @param messages    Extracted messages
  */
 export function saveMessagesToTermsFile(messages: ExtractedMessages): void {
-  let currentTerms: TermsJson = {};
+  let currentTerms: TermsJson = {
+    version: '0',
+    terms: {},
+  };
   try {
     const currentFileContent: string = fs.readFileSync(
       variables.termsFilePath,
@@ -215,15 +231,22 @@ export function saveMessagesToTermsFile(messages: ExtractedMessages): void {
     );
   }
 
-  const updatedTerms: TermsJson = createTermsFromMessages(
+  const updatedTerms: TermsMap = createTermsFromMessages(
     currentTerms,
     messages,
   );
 
-  logTermsStats(messages, updatedTerms);
+  const fileVersion: string = getTermsFileVersion(currentTerms.version);
+
+  const fileContent: TermsJson = {
+    version: fileVersion,
+    terms: updatedTerms,
+  };
+
+  logTermsStats(messages, updatedTerms, fileVersion);
 
   fs.writeFileSync(
     variables.termsFilePath,
-    JSON.stringify(updatedTerms, null, 2),
+    JSON.stringify(fileContent, null, 2),
   );
 }

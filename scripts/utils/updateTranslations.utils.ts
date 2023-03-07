@@ -1,8 +1,9 @@
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
+import promptSync from 'prompt-sync';
 
-import {SortedTranslations, Term, TermsJson} from '../types';
+import {SortedTranslations, Term, TermsJson, TermsMap} from '../types';
 import variables from './variables';
 
 /**
@@ -28,7 +29,7 @@ export function loadJsonFile<T>(filePath: string): T {
  * @returns                         The sorted translations
  */
 function getTranslationsByTermStatus(
-  currentTerms: TermsJson,
+  currentTerms: TermsMap,
   currentTranslations: Record<string, string>,
   autoUpdateTranslations: boolean,
 ): SortedTranslations {
@@ -78,6 +79,59 @@ function getTranslationsByTermStatus(
 }
 
 /**
+ * Checks if the translation file is based on the current terms version
+ *
+ * @param termsVersion          Current terms version
+ * @param currentTranslations   Current translation file
+ * @returns                     If the current translation is based on the terms
+ *                              version
+ */
+function checkTranslationSameVersion(
+  termsVersion: string,
+  currentTranslations: Record<string, string>,
+): boolean {
+  const translationVersion = currentTranslations['[VERSION]'];
+  return termsVersion === translationVersion;
+}
+
+/**
+ * Asks the user if he wishes to continue with an update for a translation file
+ * that is already based on the latest terms.
+ *
+ * Continuing with the translation might result in loosing translated terms.
+ *
+ * @param language      Language of the translation file
+ * @param termsVersion  Version of the `terms.json` file
+ * @returns             If the user decided to continue or not the update
+ */
+function shouldContinueUpdate(language: string, termsVersion: string): boolean {
+  console.log('\n--------------------\n');
+
+  console.log(
+    chalk.bold(
+      `The current ${language}.json is already based on the latest extracted terms (version ${termsVersion})`,
+    ),
+  );
+  console.log(
+    chalk.yellow(
+      `Continuing with the update for ${chalk.bold(
+        language,
+      )} might result in losing already translated terms.\n`,
+    ),
+  );
+
+  const prompt = promptSync();
+  const response: string = prompt(
+    `Are you sure you want to continue with the update for ${language}? (y/${chalk.bold(
+      'n',
+    )}): `,
+    'n',
+  );
+
+  return response.toLowerCase() === 'y';
+}
+
+/**
  * Load the translation file for the language and update the current
  * translations.
  *
@@ -109,8 +163,19 @@ export function updateTranslationsForLanguage(
     );
   }
 
+  const isTranslationSameVersion: boolean = checkTranslationSameVersion(
+    currentTerms.version,
+    currentTranslations,
+  );
+
+  if (isTranslationSameVersion && !autoUpdateTranslations) {
+    if (!shouldContinueUpdate(language, currentTerms.version)) {
+      throw new Error(`Update for ${language} cancelled by user.`);
+    }
+  }
+
   const sortedTranslations: SortedTranslations = getTranslationsByTermStatus(
-    currentTerms,
+    currentTerms.terms,
     currentTranslations,
     autoUpdateTranslations,
   );
@@ -194,6 +259,7 @@ export function logTranslationsStats(
  */
 export function saveTranslationsFile(
   translations: SortedTranslations,
+  termsVersion: string,
   language: string,
 ): void {
   const filePath: string = path.join(
@@ -202,6 +268,7 @@ export function saveTranslationsFile(
   );
 
   const mergedTranslations: Record<string, string> = {
+    '[VERSION]': termsVersion,
     ...translations.addedTranslations,
     ...translations.updatedTranslations,
     ...translations.unchangedTranslations,

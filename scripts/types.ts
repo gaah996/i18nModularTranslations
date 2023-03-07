@@ -28,9 +28,14 @@ export interface Term {
   description?: string;
 }
 
-export type TermsJson = {
+export type TermsMap = {
   [id: string]: Term;
 };
+
+export interface TermsJson {
+  version: string;
+  terms: TermsMap;
+}
 
 export interface SortedTranslations {
   addedTranslations: Record<string, string>;

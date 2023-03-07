@@ -1,4 +1,5 @@
 {
+  "[VERSION]": "1",
   "Header.helloWorld": "Hello World",
   "Header.welcome": "Welcome",
   "Task.createdAt": "Created on {{date}}",
