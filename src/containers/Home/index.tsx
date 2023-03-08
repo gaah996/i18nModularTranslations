@@ -37,12 +37,22 @@ const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
   );
 
   const handleAddTask = () => {
-    Alert.prompt(t(messages.add), undefined, (text: string) => {
-      setTasks([
-        {text, createdAt: new Date(), completedAt: undefined},
-        ...tasks,
-      ]);
-    });
+    Alert.prompt(t(messages.add), undefined, [
+      {text: t(commonMessages.cancel)},
+      {
+        text: t(commonMessages.ok),
+        onPress: (text: string | undefined) => {
+          if (!text) {
+            return;
+          }
+
+          setTasks([
+            {text: text ?? '', createdAt: new Date(), completedAt: undefined},
+            ...tasks,
+          ]);
+        },
+      },
+    ]);
   };
 
   const handleRemoveAllTasks = () => {
@@ -96,6 +106,7 @@ const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
             text={task.text}
             createdAt={task.createdAt}
             completedAt={task.completedAt}
+            language={languageProps.selectedLanguage}
             onComplete={handleCompleteTask(index)}
             onRemove={handleRemoveTask(index)}
           />

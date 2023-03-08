@@ -8,6 +8,7 @@ interface TaskProps {
   text: string;
   createdAt: Date;
   completedAt?: Date;
+  language?: string;
   onComplete: () => void;
   onRemove: () => void;
 }
@@ -16,6 +17,7 @@ const Task = ({
   text,
   createdAt,
   completedAt,
+  language = 'en',
   onComplete,
   onRemove,
 }: TaskProps): JSX.Element => {
@@ -31,11 +33,13 @@ const Task = ({
         </Text>
       </View>
       <Text style={styles.taskDate}>
-        {t(messages.createdAt, {date: createdAt.toLocaleString()})}
+        {t(messages.createdAt, {date: createdAt.toLocaleString(language)})}
       </Text>
       {!!completedAt && (
         <Text style={styles.taskDate}>
-          {t(messages.completedAt, {date: completedAt.toLocaleString()})}
+          {t(messages.completedAt, {
+            date: completedAt.toLocaleString(language),
+          })}
         </Text>
       )}
       <View style={styles.actionsContainer}>
