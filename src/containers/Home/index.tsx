@@ -8,27 +8,29 @@ import {
   Alert,
 } from 'react-native';
 import Header from '../../components/Header';
-import Task from '../../components/Task';
+import TaskComponent from '../../components/Task';
 import {t} from '../../utils/translations';
 import messages from './messages';
 import commonMessages from '../../common/messages';
+import taskCommonMessages from '../../common/task.messages';
 import styles from './styles';
 import {LanguageSelectorProps} from '../../components/LanguageSelector';
-
-interface Task {
-  text: string;
-  createdAt: Date;
-  completedAt: Date | undefined;
-}
+import {Task, TaskPriority} from '../../models/Task';
 
 const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
   const [tasks, setTasks] = useState<Task[]>([
     {
       text: 'Go to the supermarket',
+      priority: TaskPriority.Low,
       createdAt: new Date(),
       completedAt: undefined,
     },
-    {text: 'Finish project', createdAt: new Date(), completedAt: undefined},
+    {
+      text: 'Finish project',
+      priority: TaskPriority.High,
+      createdAt: new Date(),
+      completedAt: undefined,
+    },
   ]);
 
   const pendingTasks: number = useMemo(
@@ -36,7 +38,7 @@ const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
     [tasks],
   );
 
-  const handleAddTask = () => {
+  const handleAddTask = (priority: TaskPriority) => () => {
     Alert.prompt(t(messages.add), undefined, [
       {text: t(commonMessages.cancel)},
       {
@@ -47,7 +49,7 @@ const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
           }
 
           setTasks([
-            {text: text ?? '', createdAt: new Date(), completedAt: undefined},
+            {text, priority, createdAt: new Date(), completedAt: undefined},
             ...tasks,
           ]);
         },
@@ -87,8 +89,35 @@ const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
     <SafeAreaView style={styles.container}>
       <Header {...languageProps} />
       <View style={styles.actionsContainer}>
-        <TouchableOpacity style={styles.actionWrapper} onPress={handleAddTask}>
-          <Text style={styles.actionText}>{t(messages.add)}</Text>
+        <TouchableOpacity
+          style={styles.actionWrapper}
+          onPress={handleAddTask(TaskPriority.Low)}>
+          <Text style={styles.actionText}>
+            {t(messages.add)}
+            <Text style={styles.actionSmallText}>
+              {` (${t(taskCommonMessages[TaskPriority.Low])})`}
+            </Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.actionWrapper}
+          onPress={handleAddTask(TaskPriority.Medium)}>
+          <Text style={styles.actionText}>
+            {t(messages.add)}
+            <Text style={styles.actionSmallText}>
+              {` (${t(taskCommonMessages[TaskPriority.Medium])})`}
+            </Text>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.actionWrapper}
+          onPress={handleAddTask(TaskPriority.High)}>
+          <Text style={styles.actionText}>
+            {t(messages.add)}
+            <Text style={styles.actionSmallText}>
+              {` (${t(taskCommonMessages[TaskPriority.High])})`}
+            </Text>
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionWrapper}
@@ -101,11 +130,9 @@ const Home = (languageProps: LanguageSelectorProps): JSX.Element => {
       </View>
       <ScrollView style={styles.tasksContainer}>
         {tasks.map((task, index) => (
-          <Task
+          <TaskComponent
             key={index}
-            text={task.text}
-            createdAt={task.createdAt}
-            completedAt={task.completedAt}
+            task={task}
             language={languageProps.selectedLanguage}
             onComplete={handleCompleteTask(index)}
             onRemove={handleRemoveTask(index)}

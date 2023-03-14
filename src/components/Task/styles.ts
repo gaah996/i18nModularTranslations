@@ -23,7 +23,7 @@ export default StyleSheet.create({
     textDecorationLine: 'line-through',
     color: '#555',
   },
-  taskDate: {
+  taskInfo: {
     color: 'grey',
     fontSize: 12,
     paddingTop: 5,

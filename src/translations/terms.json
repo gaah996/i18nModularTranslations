@@ -1,5 +1,5 @@
 {
-  "version": "2",
+  "version": "3",
   "terms": {
     "Header.helloWorld": {
       "status": "unchanged",
@@ -29,9 +29,8 @@
       "message": "Delete"
     },
     "Home.add": {
-      "status": "updated",
+      "status": "unchanged",
       "message": "Add task",
-      "previousMessage": "Add new",
       "description": "Button to add new to-do"
     },
     "Home.removeAll": {
@@ -48,25 +47,44 @@
       "message": "You have {{count}} pending tasks"
     },
     "Common.cancel": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Cancel"
     },
     "Common.ok": {
-      "status": "added",
+      "status": "unchanged",
       "message": "OK"
     },
     "Header.name": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Name",
       "description": "Title of the name input alert"
     },
     "LanguageSelector.modalTitle": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Choose the new language:"
     },
     "Home.removeAllAlert": {
-      "status": "added",
+      "status": "unchanged",
       "message": "Are you sure you want to remove all tasks?"
+    },
+    "Common.Task.priority.low": {
+      "status": "added",
+      "message": "Low",
+      "description": "Task priority shown in the add button"
+    },
+    "Common.Task.priority.medium": {
+      "status": "added",
+      "message": "Medium",
+      "description": "Task priority shown in the add button"
+    },
+    "Common.Task.priority.high": {
+      "status": "added",
+      "message": "High",
+      "description": "Task priority shown in the add button"
+    },
+    "Task.priority": {
+      "status": "added",
+      "message": "Priority:"
     }
   }
 }

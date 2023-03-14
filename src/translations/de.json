@@ -1,5 +1,9 @@
 {
-  "[VERSION]": "2",
+  "[VERSION]": "3",
+  "Common.Task.priority.low": "Niedrig",
+  "Common.Task.priority.medium": "Mittel",
+  "Common.Task.priority.high": "Hoch",
+  "Task.priority": "Priorität:",
   "Header.helloWorld": "Hallo Welt",
   "Header.welcome": "Willkommen",
   "Task.createdAt": "Erstellt am {{date}}",

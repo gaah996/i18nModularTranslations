@@ -1,6 +1,10 @@
 import {namespacedMessages} from '../../utils/translations';
 
 export default namespacedMessages('Task')({
+  priority: {
+    id: 'priority',
+    message: 'Priority:',
+  },
   createdAt: {
     id: 'createdAt',
     message: 'Created on {{date}}',

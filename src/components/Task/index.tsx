@@ -2,21 +2,19 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {t} from '../../utils/translations';
 import messages from './messages';
+import taskCommonMessages from '../../common/task.messages';
 import styles from './styles';
+import {Task} from '../../models/Task';
 
 interface TaskProps {
-  text: string;
-  createdAt: Date;
-  completedAt?: Date;
+  task: Task;
   language?: string;
   onComplete: () => void;
   onRemove: () => void;
 }
 
-const Task = ({
-  text,
-  createdAt,
-  completedAt,
+const TaskComponent = ({
+  task,
   language = 'en',
   onComplete,
   onRemove,
@@ -27,23 +25,26 @@ const Task = ({
         <Text
           style={[
             styles.taskText,
-            completedAt ? styles.taskCompleted : undefined,
+            task.completedAt ? styles.taskCompleted : undefined,
           ]}>
-          {text}
+          {task.text}
         </Text>
       </View>
-      <Text style={styles.taskDate}>
-        {t(messages.createdAt, {date: createdAt.toLocaleString(language)})}
+      <Text style={styles.taskInfo}>{`${t(messages.priority)} ${t(
+        taskCommonMessages[task.priority],
+      )}`}</Text>
+      <Text style={styles.taskInfo}>
+        {t(messages.createdAt, {date: task.createdAt.toLocaleString(language)})}
       </Text>
-      {!!completedAt && (
-        <Text style={styles.taskDate}>
+      {!!task.completedAt && (
+        <Text style={styles.taskInfo}>
           {t(messages.completedAt, {
-            date: completedAt.toLocaleString(language),
+            date: task.completedAt.toLocaleString(language),
           })}
         </Text>
       )}
       <View style={styles.actionsContainer}>
-        {!completedAt && (
+        {!task.completedAt && (
           <TouchableOpacity style={styles.actionWrapper} onPress={onComplete}>
             <Text style={styles.actionText}>{t(messages.doneAction)}</Text>
           </TouchableOpacity>
@@ -56,4 +57,4 @@ const Task = ({
   );
 };
 
-export default Task;
+export default TaskComponent;
